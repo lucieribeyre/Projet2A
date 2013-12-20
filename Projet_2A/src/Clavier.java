@@ -14,6 +14,10 @@ public class Clavier implements KeyListener{
 			return note;
 		}
 		
+		public void essaiGit(){
+			
+		}
+		
 		public void keyReleased(KeyEvent event) {
 			try {
 				Thread.sleep(25);
@@ -32,7 +36,7 @@ public class Clavier implements KeyListener{
 	}   
 
 class KeyConverter {
-
+	
 	public static int Conversion(int i){
 		switch (i) {
 		case 17 : return 48;
@@ -85,6 +89,7 @@ class KeyConverter {
 		case 10 : return 95;
 		default : return 0;
 		}
+		
 	}
 }
 
