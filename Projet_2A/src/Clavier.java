@@ -3,40 +3,34 @@ import java.awt.event.KeyListener;
 
 
 public class Clavier implements KeyListener{
-		
-		int[] note = new int[1];;
-				
-		public void keyPressed(KeyEvent event) {
-			note[0]=KeyConverter.Conversion(event.getKeyCode());
-		}
-		
-		public int[] getNote(){
-			return note;
-		}
-		
-		public void essaiGit(){
-			
-		}
-		
-		public void keyReleased(KeyEvent event) {
-			try {
-				Thread.sleep(25);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-				note[0]=0;
-			
-			                 
-		}
 
-		public void keyTyped(KeyEvent event) {
-			
-		}   	
-	}   
+	int[] note = new int[1];
+
+	public void keyPressed(KeyEvent event) {
+		note[0]=KeyConverter.Conversion(event.getKeyCode());
+	}
+
+	public int[] getNote(){
+		return note;
+	}
+
+	public void keyReleased(KeyEvent event) {
+		try {
+			Thread.sleep(25);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		note[0]=0;
+	}
+
+	public void keyTyped(KeyEvent event) {
+
+	}   	
+}   
 
 class KeyConverter {
-	
+
 	public static int Conversion(int i){
 		switch (i) {
 		case 17 : return 48;
@@ -89,7 +83,7 @@ class KeyConverter {
 		case 10 : return 95;
 		default : return 0;
 		}
-		
+
 	}
 }
 

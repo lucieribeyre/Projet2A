@@ -16,7 +16,7 @@ public class ClavierGraphique extends JPanel {
 	Vector<Key> whiteKeys = new Vector<Key>();
 	Vector<Key> keys = new Vector<Key>();
 	boolean record;
-	final Color jfcBlue = new Color(204, 204, 255);
+	final Color blue = new Color(204, 204, 255);
 	final Color pink = new Color(255, 175, 175);
 
 	public ClavierGraphique() {
@@ -67,7 +67,7 @@ public class ClavierGraphique extends JPanel {
 		for (int i = 0; i < whiteKeys.size(); i++) {
 			Key key = (Key) whiteKeys.get(i);
 			if (key.isNoteOn()) {
-				g2.setColor(record ? pink : jfcBlue);
+				g2.setColor(record ? pink : blue);
 				g2.fill(key);
 			}
 			g2.setColor(Color.black);
@@ -76,7 +76,7 @@ public class ClavierGraphique extends JPanel {
 		for (int i = 0; i < blackKeys.size(); i++) {
 			Key key = (Key) blackKeys.get(i);
 			if (key.isNoteOn()) {
-				g2.setColor(record ? pink : jfcBlue);
+				g2.setColor(record ? pink : blue);
 				g2.fill(key);
 				g2.setColor(Color.black);
 				g2.draw(key);
