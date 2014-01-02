@@ -1,3 +1,6 @@
+package Animation;
+import Sons.Clavier;
+
 
 public class NoteAnimee extends Thread {
 	/**
@@ -16,7 +19,7 @@ public class NoteAnimee extends Thread {
 	}
 
 	public void run(){
-		for(int i=0; i<c.getNote().length;i++){
+		{
 
 		}
 	}

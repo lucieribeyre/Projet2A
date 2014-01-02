@@ -1,33 +1,33 @@
+package Sons;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 
-public class Clavier implements KeyListener{
-
-	int[] note = new int[1];
-
-	public void keyPressed(KeyEvent event) {
-		note[0]=KeyConverter.Conversion(event.getKeyCode());
-	}
-
-	public int[] getNote(){
-		return note;
-	}
-
-	public void keyReleased(KeyEvent event) {
-		try {
-			Thread.sleep(25);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+public class Clavier extends KeyAdapter{
+		
+		private int note = 0;
+		private int retour = 0;
+				
+		public void keyPressed(KeyEvent event) {
+			note=KeyConverter.Conversion(event.getKeyCode());
 		}
-		note[0]=0;
-	}
+		
+		public int getNote(){
+			retour=note;
+			note=0;
+			return retour;
+		}
+		
+		public void keyReleased(KeyEvent event) {
+					
+			                 
+		}
 
-	public void keyTyped(KeyEvent event) {
-
-	}   	
-}   
+		public void keyTyped(KeyEvent event) {
+			
+		}   	
+	}   
 
 class KeyConverter {
 
@@ -83,7 +83,6 @@ class KeyConverter {
 		case 10 : return 95;
 		default : return 0;
 		}
-
 	}
 }
 

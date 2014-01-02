@@ -1,3 +1,4 @@
+package Animation;
 import java.awt.Rectangle;
 
 
@@ -18,11 +19,9 @@ public class Key extends Rectangle {
 	}
 	public void on() {
 		setNoteState(ON);
-		cc.channel.noteOn(kNum, cc.velocity);
 	}
 	public void off() {
 		setNoteState(OFF);
-		cc.channel.noteOff(kNum, cc.velocity);
 	}
 	public void setNoteState(int state) {
 		noteState = state;
