@@ -1,24 +1,20 @@
 
-public class NoteAnimee extends Thread {
+public class NoteAnimee extends Thread{
 	/**
-	 * Cette classe a pour fonction de faire changer de couleur une touche/note du clavier graphique
-	 * lorsqu'elle reçoit une note NOTE.
-	 * L'objet cree est un thread
+	 * Cette classe a pour fonction de faire changer de couleur une touche/note du clavier graphique.
+	 * La note devient bleue si on n'enregistre pas et rose dans le cas contraire.
+	 * L'objet cree est un thread.
 	 */
 
 	// l'attribut de cet objet est un clavier(cree par Claire). 
-	// Methode Clavier : getNote(); qui renvoie un tableau d'entiers
+	// Methode Clavier : getNote(); qui renvoie un entier
 
 	private Clavier c;
+	private Key k;
+	private int note;
 
-	public NoteAnimee(Clavier clavier){
-		c=clavier;		
+	public NoteAnimee(){
+				
 	}
-
-	public void run(){
-		for(int i=0; i<c.getNote().length;i++){
-
-		}
-	}
-
 }
+

@@ -4,13 +4,13 @@ import java.awt.event.KeyListener;
 
 public class Clavier implements KeyListener{
 
-	int[] note = new int[1];
+	int note;
 
 	public void keyPressed(KeyEvent event) {
-		note[0]=KeyConverter.Conversion(event.getKeyCode());
+		note=KeyConverter.Conversion(event.getKeyCode());
 	}
 
-	public int[] getNote(){
+	public int getNote(){
 		return note;
 	}
 
@@ -21,7 +21,7 @@ public class Clavier implements KeyListener{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		note[0]=0;
+		note=0;
 	}
 
 	public void keyTyped(KeyEvent event) {
