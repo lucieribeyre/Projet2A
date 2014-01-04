@@ -22,7 +22,7 @@ public class ClavierAnime extends JPanel{
 
 
 
-	// Constructeur : creation de notre clavier graphique avec les touches noires et blanches : 
+	// Constructeur : creation du clavier graphique avec les touches noires et blanches : 
 	// blackKeys et whiteKeys
 	public ClavierAnime() {
 		setLayout(new BorderLayout());

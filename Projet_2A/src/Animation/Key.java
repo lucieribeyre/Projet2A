@@ -1,7 +1,6 @@
 package Animation;
-
+import javax.sound.midi.Patch;
 import java.awt.Rectangle;
-
 
 /**
 * Black and white keys or notes on the piano.
@@ -12,6 +11,8 @@ class Key extends Rectangle {
         final int ON = 0, OFF = 1;
         final int NOTEON = 144;
         final int NOTEOFF = 128;
+        final boolean record=true;
+        final ChannelData cc;
         
         public Key(int x, int y, int width, int height, int num) {
                 super(x, y, width, height);

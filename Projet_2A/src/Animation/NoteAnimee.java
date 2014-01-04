@@ -11,7 +11,7 @@ public class NoteAnimee extends Thread{
 	 */
 
 	// l'attribut de cet objet est un clavier(cree par Claire). 
-	// Methode Clavier : getNote(); qui renvoie un entier
+	// la methode de la classe Clavier getNote() renvoie un entier
 
 	private Clavier c;
 	private Key k;
