@@ -8,18 +8,22 @@ import java.awt.Point;
 import java.util.Vector;
 import javax.swing.JPanel;
 
+import Sons.Clavier;
+
+import java.awt.event.KeyEvent;
+import java.beans.EventHandler;
+
 
 public class ClavierAnime extends JPanel{
 
 	Vector<Touche> touchesNoires = new Vector<Touche>();
-	Touche prevKey;
 	final int kw = 16, kh = 80; // largeur et hauteur en pixels du rectangle blanc de base sur lequel s'ajoutera le rectangle noir
 	Vector<Touche> touchesBlanches = new Vector<Touche>();
 	Vector<Touche> touches = new Vector<Touche>();
 	boolean record;
 	final Color bleu = new Color(204, 204, 255); //bleu si on joue sans enregistrer
 	final Color rose = new Color(255, 175, 175); // rose si on enregistre
-
+	Clavier clavier;
 
 
 	// Constructeur : creation du clavier graphique
@@ -54,10 +58,10 @@ public class ClavierAnime extends JPanel{
 	// fin constructeur
 
 
-	
 
 	public Touche getTouche(Point point) {
 		for (int i = 0; i < touches.size(); i++) {
+
 			if (((Touche) touches.get(i)).contains(point)) {
 				return (Touche) touches.get(i);
 			}
@@ -78,6 +82,7 @@ public class ClavierAnime extends JPanel{
 		g2.setColor(Color.white);
 		g2.fillRect(0, 0, 28*kw, kh);
 
+		/*
 		for (int i = 0; i < touchesBlanches.size(); i++) {
 			Touche touche = (Touche) touchesBlanches.get(i);
 			if (touche.isNoteOn()) {
@@ -87,9 +92,35 @@ public class ClavierAnime extends JPanel{
 			g2.setColor(Color.black);
 			g2.draw(touche);
 		}
+		 */
+
+		for (int i = 0; i < touchesBlanches.size(); i++) {
+			Touche touche = (Touche) touchesBlanches.get(i);
+			if (touche.numTouche==clavier.getNote()) {
+				g2.setColor(record ? rose : bleu);
+				g2.fill(touche);
+			}
+			g2.setColor(Color.black);
+			g2.draw(touche);
+		}
+
+		/*
 		for (int i = 0; i < touchesNoires.size(); i++) {
 			Touche touche = (Touche) touchesNoires.get(i);
 			if (touche.isNoteOn()) {
+				g2.setColor(record ? rose : bleu);
+				g2.fill(touche);
+				g2.setColor(Color.black);
+				g2.draw(touche);
+			} else {
+				g2.setColor(Color.black);
+				g2.fill(touche);
+			}
+		}
+		 */
+		for (int i = 0; i < touchesNoires.size(); i++) {
+			Touche touche = (Touche) touchesNoires.get(i);
+			if (touche.numTouche==clavier.getNote()) {
 				g2.setColor(record ? rose : bleu);
 				g2.fill(touche);
 				g2.setColor(Color.black);
