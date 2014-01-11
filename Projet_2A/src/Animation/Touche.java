@@ -1,32 +1,30 @@
 package Animation;
-import javax.sound.midi.Patch;
+
+import javax.xml.soap.Text;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
 /**
- * Black and white keys or notes on the piano.
+ * Touches noires et blanches du piano
  */
-class Touche extends Rectangle {
+public class Touche extends Rectangle {
 	int noteState;
-	int numTouche;
-	final int ON = 0, OFF = 1;
-	final int NOTEON = 144;
-	final int NOTEOFF = 128;
-	final boolean record=true;
+	int numTouche; // entier correspondant au numero MIDI de la note jouee par la touche
+	String lettre; // lettre du clavier de l'ordinateur qui sera affichee sur la note correspondante du clavier du piano virtuel
+	Text nom_touche;
 
-	public Touche(int x, int y, int width, int height, int num) {
+	public Touche(String l, int x, int y, int width, int height, int num) {
 		super(x, y, width, height);
-		numTouche = num;
-	}
-	public boolean isNoteOn() {
-		return noteState == ON;
-	}
-	public void on() {
-		setNoteState(ON);
-	}
-	public void off() {
-		setNoteState(OFF);
-	}
-	public void setNoteState(int state) {
-		noteState = state;
+		this.numTouche = num;
+		lettre = l;
+
+		nom_touche = new Text(lettre);
+		nom_touche.setFont(new Font(25));
+		nom_touche.setfill(Color.red);
+		nom_touche.setX(25);
+        nom_touche.setY(45);
+
 	}
 }
