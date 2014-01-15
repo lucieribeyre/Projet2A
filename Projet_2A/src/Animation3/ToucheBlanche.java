@@ -34,4 +34,10 @@ public class ToucheBlanche extends Touche{
 		g.drawString(a,x+13,98);
 	}
 
+	@Override
+	public void changerCouleur(Graphics g) {
+		// TODO Auto-generated method stub
+		g.setColor(colorT.BLUE);
+	}
+
 }

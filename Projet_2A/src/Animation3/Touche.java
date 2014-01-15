@@ -39,4 +39,6 @@ public abstract class Touche {
 	public abstract void dessinerTouche(Graphics g);
 
 	public abstract void ecrireSymbole(Graphics g);
+	
+	public abstract void changerCouleur(Graphics g);
 }

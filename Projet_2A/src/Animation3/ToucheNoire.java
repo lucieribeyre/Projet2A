@@ -6,7 +6,7 @@ import java.awt.Graphics;
 
 /**
  * Cette classe crée une touche noire : un rectangle de taille 13*65 px et d'angle superieur gauche
- * de coordonnees (x,0).Sur cette touche sera ecrit le symbole a correspondant du clavier de l'ordinateur
+ * de coordonnees (x,0).Sur cette touche sera ecrit le symbole "a" correspondant du clavier de l'ordinateur
  * en position (x+13, 49).
  *
  */
@@ -33,6 +33,12 @@ public class ToucheNoire extends Touche{
 		g.setFont(font);      
 		g.setColor(col);
 		g.drawString(a,x+13,49);
+	}
+
+	@Override
+	public void changerCouleur(Graphics g) {
+		// TODO Auto-generated method stub
+		g.setColor(colorT.BLUE);
 	}
 
 }
