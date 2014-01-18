@@ -17,6 +17,7 @@ import javax.swing.event.ChangeListener;
 import enregistrer_lire.Recordeur;
 import enregistrer_lire.TableauLecteur;
 
+import Animation3.ClavierAnime2;
 import Sons.Clavier;
 import Sons.EmettreSon;
 import Sons.Joueur;
@@ -29,7 +30,6 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		Synthetiseur s= new Synthetiseur();
 		Clavier c=new Clavier();
 		Clavier cl=new Clavier();
@@ -37,9 +37,11 @@ public class Main {
 		Recordeur r = new Recordeur(cl, s, tl);
 
 		EmettreSon es= new EmettreSon(0, s);
-		new Fenetre2(tl,r, s, c, cl, es);
+		Fenetre2 f = new Fenetre2(tl,r, s, c, cl, es);
 		Joueur j =new Joueur(es, c);
-
+		
+		new ClavierAnime2(f.getGraphics(), cl).start();
+		
 		j.start();
 
 	}
@@ -48,6 +50,10 @@ public class Main {
 
 
 class Fenetre2 extends JFrame implements ActionListener, ChangeListener, ItemListener {        
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	EmettreSon es;
 
 	public Fenetre2(TableauLecteur tl, Recordeur r, Synthetiseur s, Clavier cl, Clavier c, EmettreSon ees){
@@ -105,8 +111,6 @@ class Fenetre2 extends JFrame implements ActionListener, ChangeListener, ItemLis
 
 
 	}
-
-
 
 	public void meta(MetaMessage arg0) {
 		// TODO Auto-generated method stub
