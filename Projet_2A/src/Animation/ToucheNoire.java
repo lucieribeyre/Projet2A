@@ -1,4 +1,4 @@
-package Animation3;
+package Animation;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -18,14 +18,20 @@ public class ToucheNoire extends Touche{
 	
 	@Override
 	public void dessinerTouche(Graphics g) {
-		g.setColor(Color.BLACK);
-		g.drawRect(69,149,(w+1)*28,h+1);
+		g.setColor(colorT);
+		g.drawRect(69,141,(w+1)*28,h+1);
 		g.fillRect(x, y, w/2, h/2);
 	}
 	
 	public void ecrireSymbole(Graphics g){
 		super.ecrireSymbole(g);
-		g.drawString(a,x+3,y-10);
+		g.drawString(a,x+3,y-7);
+	}
+	
+	@Override
+	public Color getCouleur() {
+		// TODO Auto-generated method stub
+		return Color.BLACK;
 	}
 
 }

@@ -1,4 +1,4 @@
-package Sons;
+package main;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -21,7 +21,7 @@ public class Clavier extends KeyAdapter{
 
 	public void keyReleased(KeyEvent event) {
 
-
+		
 	}
 
 	public void keyTyped(KeyEvent event) {

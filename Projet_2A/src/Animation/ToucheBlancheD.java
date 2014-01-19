@@ -1,4 +1,4 @@
-package Animation3;
+package Animation;
 
 import java.awt.*; 
 
@@ -24,6 +24,12 @@ public class ToucheBlancheD extends Touche{
 	public void ecrireSymbole(Graphics g){
 		super.ecrireSymbole(g);
 		g.drawString(a,x+12,y+163);
+	}
+	
+	@Override
+	public Color getCouleur() {
+		// TODO Auto-generated method stub
+		return Color.WHITE;
 	}
 
 }

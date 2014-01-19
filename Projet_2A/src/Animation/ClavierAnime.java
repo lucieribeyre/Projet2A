@@ -1,133 +1,128 @@
 package Animation;
-import java.awt.BorderLayout;
+
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Point;
-import java.util.Vector;
-import javax.swing.JPanel;
+import java.util.ArrayList;
+import java.util.List;
 
-import Sons.Clavier;
+import main.Clavier;
 
-import java.awt.event.KeyEvent;
-import java.beans.EventHandler;
+public class ClavierAnime extends Thread {
+
+	private List<Touche> Touches = new ArrayList<Touche>();
+	Clavier c;
+	Graphics g;
+	private int a=30;
+	private int decalageBN = 5;
+	private int[] note = new int[200];
+	private int compteur=0;
+
+	public ClavierAnime(Graphics gr, Clavier cl){
+
+		this.g = gr;
+		this.c = cl;
+
+		Touches.add(new ToucheBlancheG(0,0,"Ctrl"));
+		Touches.add(new ToucheNoire((a+1)-decalageBN,0,"Verr"));
+		Touches.add(new ToucheBlancheM( a+1,0,"Shift"));
+		Touches.add(new ToucheNoire(2*(a+1)-decalageBN,0,"Q"));
+		Touches.add(new ToucheBlancheD( 2*(a+1),0,"<>"));
+		Touches.add(new ToucheBlancheG( 3*(a+1),0,"W"));
+		Touches.add(new ToucheNoire(4*(a+1)-decalageBN,0,"S"));
+		Touches.add(new ToucheBlancheM( 4*(a+1),0,"X"));
+		Touches.add(new ToucheNoire(5*(a+1)-decalageBN,0,"D"));
+		Touches.add(new ToucheBlancheM( 5*(a+1),0,"C"));
+		Touches.add(new ToucheNoire(6*(a+1)-decalageBN,0,"F"));
+		Touches.add(new ToucheBlancheD( 6*(a+1),0,"V"));
+		Touches.add(new ToucheBlancheG( 7*(a+1),0,"B"));
+		Touches.add(new ToucheNoire(8*(a+1)-decalageBN,0,"H"));
+		Touches.add(new ToucheBlancheM( 8*(a+1),0,"N"));
+		Touches.add(new ToucheNoire(9*(a+1)-decalageBN,0,"J"));
+		Touches.add(new ToucheBlancheD( 9*(a+1),0,"?"));
+		Touches.add(new ToucheBlancheG( 10*(a+1),0,".;"));
+		Touches.add(new ToucheNoire(11*(a+1)-decalageBN,0,"K"));
+		Touches.add(new ToucheBlancheM( 11*(a+1),0,":/"));
+		Touches.add(new ToucheNoire(12*(a+1)-decalageBN,0,"L"));
+		Touches.add(new ToucheBlancheM( 12*(a+1),0,"!§"));
+		Touches.add(new ToucheNoire(13*(a+1)-decalageBN,0,"M"));
+		Touches.add(new ToucheBlancheD( 13*(a+1),0,"ù%"));
+		Touches.add(new ToucheBlancheG( 14*(a+1),0,"*µ"));
+		Touches.add(new ToucheNoire(15*(a+1)-decalageBN,0,"1"));
+		Touches.add(new ToucheBlancheM( 15*(a+1),0,"A"));
+		Touches.add(new ToucheNoire(16*(a+1)-decalageBN,0,"2"));
+		Touches.add(new ToucheBlancheD( 16*(a+1),0,"Z"));
+		Touches.add(new ToucheBlancheG( 17*(a+1),0,"E"));
+		Touches.add(new ToucheNoire(18*(a+1)-decalageBN,0,"4"));
+		Touches.add(new ToucheBlancheM( 18*(a+1),0,"R"));
+		Touches.add(new ToucheNoire(19*(a+1)-decalageBN,0,"5"));
+		Touches.add(new ToucheBlancheM( 19*(a+1),0,"T"));
+		Touches.add(new ToucheNoire(20*(a+1)-decalageBN,0,"6"));
+		Touches.add(new ToucheBlancheD( 20*(a+1),0,"Y"));
+		Touches.add(new ToucheBlancheG( 21*(a+1),0,"U"));
+		Touches.add(new ToucheNoire(22*(a+1)-decalageBN,0,"8"));
+		Touches.add(new ToucheBlancheM( 22*(a+1),0,"I"));
+		Touches.add(new ToucheNoire(23*(a+1)-decalageBN,0,"9"));
+		Touches.add(new ToucheBlancheD( 23*(a+1),0,"O"));
+		Touches.add(new ToucheBlancheG( 24*(a+1),0,"P"));
+		Touches.add(new ToucheNoire(25*(a+1)-decalageBN,0,")°]"));
+		Touches.add(new ToucheBlancheM( 25*(a+1),0,"^¨"));
+		Touches.add(new ToucheNoire(26*(a+1)-decalageBN,0,"=+}"));
+		Touches.add(new ToucheBlancheM( 26*(a+1),0,"£$"));
+		Touches.add(new ToucheNoire(27*(a+1)-decalageBN,0,"Del"));
+		Touches.add(new ToucheBlancheD( 27*(a+1),0,"Ent"));
 
 
-public class ClavierAnime extends JPanel{
 
-	Vector<Touche> touchesNoires = new Vector<Touche>();
-	final int kw = 16, kh = 80; // largeur et hauteur en pixels du rectangle blanc de base sur lequel s'ajoutera le rectangle noir
-	Vector<Touche> touchesBlanches = new Vector<Touche>();
-	Vector<Touche> touches = new Vector<Touche>();
-	boolean record;
-	final Color bleu = new Color(204, 204, 255); //bleu si on joue sans enregistrer
-	final Color rose = new Color(255, 175, 175); // rose si on enregistre
-	Clavier clavier;
-
-
-	// Constructeur : creation du clavier graphique
-
-	public ClavierAnime() {
-		setLayout(new BorderLayout());
-		setPreferredSize(new Dimension(28*kw, kh+1)); // 28 touches blanches
-		int transpose = 24;  
-		int whiteIDs[] = { 0, 2, 4, 5, 7, 9, 11 }; // nombre de demi-tons entre deux notes blanches
-
-		// 28 touches blanches
-		for (int i = 2, x = 0; i < 6; i++) { // 4 octaves
-			for (int j = 0; j < 7; j++, x += kw) { // transposition de l'abscisse x de kw pixels pour dessiner la note suivante
-				int numTouche = i * 12 + whiteIDs[j] + transpose; // 12 demi-tons donc i*12 pour passer a l'octave suivante
-				touchesBlanches.add(new Touche(x, 0, kw, kh, numTouche)); 
-			}
-		}
-		//20 touches noires
-		for (int i = 2, x = 0; i < 6; i++, x += kw) { //4 octaves
-			int numTouche = i * 12 + transpose;
-			touchesNoires.add(new Touche((x += kw)-4, 0, kw/2, kh/2, numTouche+1)); //keyNum + a : ajout du bon nombre de demi-tons a au keyNum de reference de la touche blanche
-			touchesNoires.add(new Touche((x += kw)-4, 0, kw/2, kh/2, numTouche+3));
-			x += kw; // pour passer du re# au fa#
-			touchesNoires.add(new Touche((x += kw)-4, 0, kw/2, kh/2, numTouche+6));
-			touchesNoires.add(new Touche((x += kw)-4, 0, kw/2, kh/2, numTouche+8));
-			touchesNoires.add(new Touche((x += kw)-4, 0, kw/2, kh/2, numTouche+10));
-		}
-
-		touches.addAll(touchesNoires);
-		touches.addAll(touchesBlanches);
 	}
-	// fin constructeur
 
+	public void paint(){
+		for(Touche t : Touches){
+			t.dessinerTouche(g);
+			t.ecrireSymbole(g);
+		}
+	}
 
+	public void decompte(int b){
 
-	public Touche getTouche(Point point) {
-		for (int i = 0; i < touches.size(); i++) {
-
-			if (((Touche) touches.get(i)).contains(point)) {
-				return (Touche) touches.get(i);
+		if(b<note.length-2){
+			if(note[b+1]!=-48){
+				Touches.get(note[b+1]).setColor(Touches.get(note[b+1]).getCouleur());
 			}
 		}
-		return null;
+
+		if(b==note.length-1){
+			if(note[0]!=-48){
+				Touches.get(note[0]).setColor(Touches.get(note[0]).getCouleur());
+			}
+		}
 	}
 
 
+	public void run(){
+		while(true){
 
-	// On peint les touches noires et blanches en bleu si on n'enregistre pas et en rose sinon
-	public void paint(Graphics g) {
-		Graphics2D g2 = (Graphics2D) g;
-		Dimension d = getSize();
 
-		g2.setBackground(getBackground());
-		g2.clearRect(0, 0, d.width, d.height);
-
-		g2.setColor(Color.white);
-		g2.fillRect(0, 0, 28*kw, kh);
-
-		/*
-		for (int i = 0; i < touchesBlanches.size(); i++) {
-			Touche touche = (Touche) touchesBlanches.get(i);
-			if (touche.isNoteOn()) {
-				g2.setColor(record ? rose : bleu);
-				g2.fill(touche);
+			//regarder l'entier reçu de Claire
+			// changer de couleur en fonction du resultat
+			int a=c.getNote();
+			for(int i=0; i<Touches.size(); i++){
+				if(a==i+48){
+					Touches.get(i).setColor(Color.BLUE);
+				}
 			}
-			g2.setColor(Color.black);
-			g2.draw(touche);
-		}
-		 */
+			note[compteur]=a-48;
+			decompte(compteur);
+			compteur++;
+			if(compteur==note.length)
+				compteur=0;
+			//on peint le clavier
+			this.paint();
 
-		for (int i = 0; i < touchesBlanches.size(); i++) {
-			Touche touche = (Touche) touchesBlanches.get(i);
-			if (touche.numTouche==clavier.getNote()) {
-				g2.setColor(record ? rose : bleu);
-				g2.fill(touche);
-			}
-			g2.setColor(Color.black);
-			g2.draw(touche);
-		}
-
-		/*
-		for (int i = 0; i < touchesNoires.size(); i++) {
-			Touche touche = (Touche) touchesNoires.get(i);
-			if (touche.isNoteOn()) {
-				g2.setColor(record ? rose : bleu);
-				g2.fill(touche);
-				g2.setColor(Color.black);
-				g2.draw(touche);
-			} else {
-				g2.setColor(Color.black);
-				g2.fill(touche);
-			}
-		}
-		 */
-		for (int i = 0; i < touchesNoires.size(); i++) {
-			Touche touche = (Touche) touchesNoires.get(i);
-			if (touche.numTouche==clavier.getNote()) {
-				g2.setColor(record ? rose : bleu);
-				g2.fill(touche);
-				g2.setColor(Color.black);
-				g2.draw(touche);
-			} else {
-				g2.setColor(Color.black);
-				g2.fill(touche);
+			//repos du clavier (Thread)
+			try {
+				Thread.sleep(1);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
 			}
 		}
 	}

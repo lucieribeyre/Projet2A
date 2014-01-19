@@ -1,51 +1,58 @@
 package enregistrer_lire;
 import java.util.ArrayList;
 
-import Sons.Clavier;
+import main.Clavier;
+
 
 
 public class Enregistreur extends Thread{
 
-        private ArrayList<Integer> enre;
-        static Clavier c;
-        private Boolean record;
+	private ArrayList<Integer> enre;
+	static Clavier c;
+	private Boolean record;
 
-        public Enregistreur(Clavier cl){
-                c=cl;
-                enre = new ArrayList<Integer>();
-                record = false;
-        }
+	public Enregistreur(Clavier cl){
+		c=cl;
+		enre =  new ArrayList<Integer>();
+		record = false;
+	}
 
-        public void addNote(int i){
-                enre.add(i);
-        }
+	/*pemet d'ajouter une note a la piste de lecture*/
+	public void addNote(int i){
+		enre.add(i);
+	}
 
-        public ArrayList<Integer> list(){
-                return enre;
-        }
+	
+	/*retourne la piste d'enregistrement qui est une liste d'entier*/
+	public ArrayList<Integer> list(){
+		return enre;
+	}
 
-        public void reset(){
-                enre.clear();
-        }
+	/*remet la piste d'enregistrement a zero*/
+	public void reset(){
+		enre.clear();
+	}
 
-        public void setRecord(Boolean b){
-                record=b;
-        }
+	/*permet de choisir si la piste est en mode enregistrement ou non*/
+	public void setRecord(Boolean b){
+		record=b;
+	}
 
-        public void run(){
-                while(true){
-                        
-                        if(record){
-                                enre.add((c.getNote()));
-                        }
-                        try {
-                                this.sleep(1);
-                        } catch (InterruptedException e) {
-                                // TODO Auto-generated catch block
-                                e.printStackTrace();
-                        }
-                }
+	/*thread permettant d'enregistrer la piste*/
+	public void run(){
+		while(true){
+			
+			if(record){
+				enre.add((c.getNote()));
+			}
+			try {
+				this.sleep(1);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 
-        }
+	}
 
 }

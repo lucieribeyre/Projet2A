@@ -1,4 +1,4 @@
-package Animation3;
+package Animation;
 
 import java.awt.*;
 import java.awt.image.*;
